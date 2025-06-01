@@ -1,102 +1,75 @@
 import React, { useState } from 'react';
 import Container from './Container';
 import logo from '../assets/Logo.png';
-import { Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react'; // optional: or use your own icons
 
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const toggleMenu = () => setIsOpen(!isOpen);
-
-  const navLinks = [
-    "Home",
-    "About",
-    "Service",
-    "Portfolio",
-    "Price",
-    "Blog"
-  ];
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
-    <div className='py-[30px] relative z-50'>
-      <Container>
-        <div className="flex justify-between items-center">
-          {/* Logo */}
+    <div className='py-6'>
+      <Container className="">
+        <div className='flex justify-between items-center lg:mx-0 mx-[30px]'>
           <div>
-            <img src={logo} alt="Logo" className="w-[120px]" />
+            <img src={logo} alt='Logo' className='lg:w-[120px] ' />
           </div>
 
-          {/* Desktop Menu */}
-          <div className="hidden lg:block">
-            <ul className='flex items-center gap-x-[48px]'>
-              {navLinks.map((link, idx) => (
-                <li key={idx}>
-                  <a
-                    href="#"
-                    className='text-[18px] font-OpenSans font-semibold text-[#29313D] hover:text-[#FF5538] duration-300'
-                  >
-                    {link}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* Desktop Nav */}
+          <ul className='hidden lg:flex items-center gap-x-12'>
+            {['Home', 'About', 'Service', 'Portfolio', 'Price', 'Blog'].map((item) => (
+              <li key={item}>
+                <a
+                  href='#'
+                  className='text-base font-OpenSans font-semibold text-[#29313D] hover:text-[#FF5538] transition duration-300'
+                >
+                  {item}
+                </a>
+              </li>
+            ))}
+          </ul>
 
-          {/* Desktop Button */}
-          <div className="hidden lg:block">
-            <a href="#" className='text-[18px] font-Nunito font-semibold leading-[200%] text-[#fff] py-[14px] px-[28px] rounded-[18px] bg-[#FF5538]'>
-              Contact Us
-            </a>
-          </div>
-
-          {/* Mobile Burger Icon */}
-          <div className="lg:hidden">
-            <button onClick={toggleMenu}>
-              {isOpen ? <X size={28} /> : <Menu size={28} />}
-            </button>
-          </div>
-        </div>
-      </Container>
-
-      {/* Mobile Sidebar */}
-      <div className={`fixed top-0 left-0 w-[250px] h-full bg-white shadow-md transition-transform duration-300 z-40 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-        <div className="flex justify-between items-center px-4 py-5 border-b">
-          <img src={logo} alt="Logo" className="w-[100px]" />
-          <button onClick={toggleMenu}>
-            <X size={24} />
-          </button>
-        </div>
-        <ul className='flex flex-col gap-y-5 px-6 py-6'>
-          {navLinks.map((link, idx) => (
-            <li key={idx}>
-              <a
-                href="#"
-                onClick={toggleMenu}
-                className='text-[18px] font-OpenSans font-semibold text-[#29313D] hover:text-[#FF5538] duration-300'
-              >
-                {link}
-              </a>
-            </li>
-          ))}
-          <li>
+          <div className='hidden lg:block'>
             <a
-              href="#"
-              onClick={toggleMenu}
-              className='block mt-4 text-center text-[18px] font-Nunito font-semibold leading-[200%] text-[#fff] py-[14px] px-[28px] rounded-[18px] bg-[#FF5538]'
+              href='#'
+              className='text-base font-Nunito font-semibold text-white py-3 px-6 rounded-xl bg-[#FF5538]'
             >
               Contact Us
             </a>
-          </li>
-        </ul>
-      </div>
+          </div>
 
-      {/* Backdrop */}
-      {isOpen && (
-        <div
-          className="fixed inset-0 bg-black/40 z-30 lg:hidden"
-          onClick={toggleMenu}
-        />
-      )}
+          {/* Mobile Menu Button */}
+          <div className='lg:hidden '>
+            <button onClick={toggleMenu}>
+              {isOpen ? <X size={28} className='absolute top-[30px] right-[30px] z-30' /> : <Menu size={28} />}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Dropdown Menu */}
+        {isOpen && (
+          <div className='lg:hidden absolute top-0 right-0 w-[70%] h-[100dvh] bg-white shadow-md pt-[50px] px-[30px] space-y-4'>
+            {['Home', 'About', 'Service', 'Portfolio', 'Price', 'Blog'].map((item) => (
+              <a
+                key={item}
+                href='#'
+                className='block text-base font-OpenSans font-semibold text-[#29313D] hover:text-[#FF5538] transition duration-300'
+              >
+                {item}
+              </a>
+            ))}
+            <a
+              href='#'
+              className='block text-center text-base font-Nunito font-semibold text-white py-3 px-6 rounded-xl bg-[#FF5538]'
+            >
+              Contact Us
+            </a>
+          </div>
+        )}
+      </Container>
     </div>
   );
 };

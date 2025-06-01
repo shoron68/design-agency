@@ -13,17 +13,17 @@ function App() {
 
   return (
     <>
-    <div className="bg-[url(./assets/heroGroup.png)]">
+    <div className="bg-[url(./assets/heroGroup.png)] bg-no-repeat  ">
       <Nav/>
-    {/* <Hero/> */}
+    <Hero/>
     </div>
-    {/* <DigitalExperience/>
+    <DigitalExperience/>
     <WorkStill/>
     <Service/>
     <Orgainization/>
     <Customer/>
     <GotProject/>
-    <Footer/> */}
+    <Footer/>
       
     </>
   )
